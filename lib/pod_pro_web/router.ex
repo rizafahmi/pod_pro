@@ -18,6 +18,13 @@ defmodule PodProWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/podcasts", PodcastLive.Index, :index
+    live "/podcasts/new", PodcastLive.Index, :new
+    live "/podcasts/:id/edit", PodcastLive.Index, :edit
+
+    live "/podcasts/:id", PodcastLive.Show, :show
+    live "/podcasts/:id/show/edit", PodcastLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

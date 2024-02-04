@@ -1,0 +1,33 @@
+<.header>
+  Podcast <%= @podcast.id %>
+  <:subtitle>This is a podcast record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/podcasts/#{@podcast}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit podcast</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Url"><%= @podcast.url %></:item>
+  <:item title="Title"><%= @podcast.title %></:item>
+  <:item title="Author"><%= @podcast.author %></:item>
+  <:item title="Description"><%= @podcast.description %></:item>
+  <:item title="Category"><%= @podcast.category %></:item>
+  <:item title="Thumbnail"><%= @podcast.thumbnail %></:item>
+  <:item title="Language"><%= @podcast.language %></:item>
+  <:item title="Link"><%= @podcast.link %></:item>
+</.list>
+
+<.back navigate={~p"/podcasts"}>Back to podcasts</.back>
+
+<.modal :if={@live_action == :edit} id="podcast-modal" show on_cancel={JS.patch(~p"/podcasts/#{@podcast}")}>
+  <.live_component
+    module={PodProWeb.PodcastLive.FormComponent}
+    id={@podcast.id}
+    title={@page_title}
+    action={@live_action}
+    podcast={@podcast}
+    patch={~p"/podcasts/#{@podcast}"}
+  />
+</.modal>
