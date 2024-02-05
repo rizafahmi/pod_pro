@@ -20,6 +20,7 @@
   <:col :let={{_id, podcast}} label="Thumbnail"><%= podcast.thumbnail %></:col>
   <:col :let={{_id, podcast}} label="Language"><%= podcast.language %></:col>
   <:col :let={{_id, podcast}} label="Link"><%= podcast.link %></:col>
+  <:col :let={{_id, podcast}} label="Slug"><%= podcast.slug %></:col>
   <:action :let={{_id, podcast}}>
     <div class="sr-only">
       <.link navigate={~p"/podcasts/#{podcast}"}>Show</.link>

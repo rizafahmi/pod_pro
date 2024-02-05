@@ -22,11 +22,12 @@ defmodule PodProWeb.PodcastLive.FormComponent do
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:title]} type="text" label="Title" />
         <.input field={@form[:author]} type="text" label="Author" />
-        <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:category]} type="text" label="Category" />
         <.input field={@form[:thumbnail]} type="text" label="Thumbnail" />
         <.input field={@form[:language]} type="text" label="Language" />
         <.input field={@form[:link]} type="text" label="Link" />
+        <.input field={@form[:slug]} type="text" label="Slug" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Podcast</.button>
         </:actions>

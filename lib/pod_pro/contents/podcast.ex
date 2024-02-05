@@ -13,6 +13,7 @@ defmodule PodPro.Contents.Podcast do
     field :url, :string
     field :language, :string
     field :thumbnail, :string
+    field :slug, :string
 
     timestamps(type: :utc_datetime)
   end
@@ -20,7 +21,25 @@ defmodule PodPro.Contents.Podcast do
   @doc false
   def changeset(podcast, attrs) do
     podcast
-    |> cast(attrs, [:url, :title, :author, :description, :category, :thumbnail, :language, :link])
-    |> validate_required([:url, :title, :author, :description, :category, :thumbnail, :language, :link])
+    |> cast(attrs, [
+      :url,
+      :title,
+      :author,
+      :description,
+      :category,
+      :thumbnail,
+      :language,
+      :link,
+      :slug
+    ])
+    |> validate_required([
+      :url,
+      :title,
+      :author,
+      :description,
+      :language,
+      :link,
+      :slug
+    ])
   end
 end
