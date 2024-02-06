@@ -26,12 +26,12 @@ defmodule PodProWeb.Router do
     live "/podcasts/:id", PodcastLive.Show, :show
     live "/podcasts/:id/show/edit", PodcastLive.Show, :edit
 
-    live "/podcasts/:id/episodes", EpisodeLive.Index, :index
-    live "/podcasts/:id/episodes/new", EpisodeLive.Index, :new
-    live "/episodes/:id/edit", EpisodeLive.Index, :edit
+    live "/podcasts/:pod_id/episodes", EpisodeLive.Index, :index
+    live "/podcasts/:pod_id/episodes/new", EpisodeLive.Index, :new
+    live "/podcasts/:pod_id/episodes/:id/edit", EpisodeLive.Index, :edit
 
-    live "/episodes/:id", EpisodeLive.Show, :show
-    live "/episodes/:id/show/edit", EpisodeLive.Show, :edit
+    live "/podcasts/:pod_id/episodes/:id", EpisodeLive.Show, :show
+    live "/podcasts/:pod_id/episodes/:id/show/edit", EpisodeLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

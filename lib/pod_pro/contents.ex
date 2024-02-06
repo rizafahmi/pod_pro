@@ -109,12 +109,14 @@ defmodule PodPro.Contents do
 
   ## Examples
 
-      iex> list_episodes()
+      iex> list_episodes("abc-123-xyz-456")
       [%Episode{}, ...]
 
   """
-  def list_episodes do
-    Repo.all(Episode)
+  def list_episodes(pod_id) do
+    # Repo.all(Episode)
+    query = from(e in Episode, where: e.podcast_id == ^pod_id, order_by: [desc: e.pub_date])
+    Repo.all(query)
   end
 
   @doc """

@@ -1,8 +1,8 @@
 <.header>
-  Episode <%= @episode.id %>
+  Episode <%= @episode.id %> for podcast <%= @podcast_id %>
   <:subtitle>This is a episode record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/episodes/#{@episode}/show/edit"} phx-click={JS.push_focus()}>
+    <.link patch={~p"/podcasts/#{@podcast_id}/episodes/#{@episode}/show/edit"} phx-click={JS.push_focus()}>
       <.button>Edit episode</.button>
     </.link>
   </:actions>
@@ -17,15 +17,15 @@
   <:item title="Duration"><%= @episode.duration %></:item>
 </.list>
 
-<.back navigate={~p"/episodes"}>Back to episodes</.back>
+<.back navigate={~p"/podcasts/#{@episode.podcast_id}/episodes"}>Back to episodes</.back>
 
-<.modal :if={@live_action == :edit} id="episode-modal" show on_cancel={JS.patch(~p"/episodes/#{@episode}")}>
+<.modal :if={@live_action == :edit} id="episode-modal" show on_cancel={JS.patch(~p"/podcasts/#{@episode.podcast_id}/episodes/#{@episode}")}>
   <.live_component
     module={PodProWeb.EpisodeLive.FormComponent}
     id={@episode.id}
     title={@page_title}
     action={@live_action}
     episode={@episode}
-    patch={~p"/episodes/#{@episode}"}
+    patch={~p"/podcasts/#{@episode.podcast_id}/episodes/#{@episode}"}
   />
 </.modal>

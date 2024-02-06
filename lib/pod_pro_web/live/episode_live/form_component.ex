@@ -41,18 +41,16 @@ defmodule PodProWeb.EpisodeLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:podcast_id, changeset.data.podcast_id)
      |> assign_form(changeset)}
   end
 
   def handle_params(params, _url, socket) do
-    dbg(params)
     {:ok, assign(socket, params)}
   end
 
   @impl true
   def handle_event("validate", %{"episode" => episode_params}, socket) do
-    dbg(socket.assigns)
-
     changeset =
       socket.assigns.episode
       |> Contents.change_episode(episode_params)

@@ -6,15 +6,15 @@ defmodule PodProWeb.EpisodeLive.Index do
 
   @impl true
   def mount(params, _session, socket) do
-    socket = socket |> assign(:podcast_id, params["id"])
-    {:ok, stream(socket, :episodes, Contents.list_episodes())}
+    socket = socket |> assign(:podcast_id, params["pod_id"])
+    {:ok, stream(socket, :episodes, Contents.list_episodes(params["pod_id"]))}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
     socket =
       socket
-      |> assign(:podcast_id, params["id"])
+      |> assign(:podcast_id, params["pod_id"])
 
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
