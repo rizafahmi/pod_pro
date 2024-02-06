@@ -20,7 +20,7 @@ defmodule PodProWeb.EpisodeLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:description]} type="textarea" label="Description" />
         <.input field={@form[:pub_date]} type="datetime-local" label="Pub date" />
         <.input field={@form[:url]} type="text" label="Url" />
         <.input field={@form[:type]} type="text" label="Type" />

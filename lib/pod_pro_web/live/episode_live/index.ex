@@ -25,7 +25,7 @@ defmodule PodProWeb.EpisodeLive.Index do
     |> assign(:episode, Contents.get_episode!(id))
   end
 
-  defp apply_action(socket, :new, %{"id" => podcast_id}) do
+  defp apply_action(socket, :new, %{"pod_id" => podcast_id}) do
     socket
     |> assign(:page_title, "New Episode")
     |> assign(:episode, %Episode{})
