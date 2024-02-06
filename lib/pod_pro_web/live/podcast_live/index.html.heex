@@ -10,9 +10,8 @@
 <.table
   id="podcasts"
   rows={@streams.podcasts}
-  row_click={fn {_id, podcast} -> JS.navigate(~p"/podcasts/#{podcast}") end}
+  row_click={fn {_id, podcast} -> JS.navigate(~p"/podcasts/#{podcast}/episodes") end}
 >
-  <:col :let={{_id, podcast}} label="Url"><%= podcast.url %></:col>
   <:col :let={{_id, podcast}} label="Title"><%= podcast.title %></:col>
   <:col :let={{_id, podcast}} label="Author"><%= podcast.author %></:col>
   <:col :let={{_id, podcast}} label="Description"><%= podcast.description %></:col>

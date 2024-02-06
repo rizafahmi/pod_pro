@@ -20,6 +20,8 @@
   <:item title="Slug"><%= @podcast.slug %></:item>
 </.list>
 
+  <pre><%= @podcast.episodes %></pre>
+
 <.back navigate={~p"/podcasts"}>Back to podcasts</.back>
 
 <.modal :if={@live_action == :edit} id="podcast-modal" show on_cancel={JS.patch(~p"/podcasts/#{@podcast}")}>

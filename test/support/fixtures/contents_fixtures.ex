@@ -24,4 +24,23 @@ defmodule PodPro.ContentsFixtures do
 
     podcast
   end
+
+  @doc """
+  Generate a episode.
+  """
+  def episode_fixture(attrs \\ %{}) do
+    {:ok, episode} =
+      attrs
+      |> Enum.into(%{
+        description: "some description",
+        duration: 42,
+        pub_date: ~N[2024-02-04 03:23:00],
+        title: "some title",
+        type: "some type",
+        url: "some url"
+      })
+      |> PodPro.Contents.create_episode()
+
+    episode
+  end
 end

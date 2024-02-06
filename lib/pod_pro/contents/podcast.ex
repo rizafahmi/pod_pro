@@ -14,6 +14,7 @@ defmodule PodPro.Contents.Podcast do
     field :language, :string
     field :thumbnail, :string
     field :slug, :string
+    has_many :episodes, PodPro.Contents.Episode
 
     timestamps(type: :utc_datetime)
   end

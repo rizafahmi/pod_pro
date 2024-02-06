@@ -1,0 +1,47 @@
+<.header>
+  Listing Episodes
+  <:actions>
+    <.link patch={~p"/podcasts/#{@podcast_id}/episodes/new"}>
+      <.button>New Episode</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="episodes"
+  rows={@streams.episodes}
+  row_click={fn {_id, episode} -> JS.navigate(~p"/episodes/#{episode}") end}
+>
+  <:col :let={{_id, episode}} label="Title"><%= episode.title %></:col>
+  <:col :let={{_id, episode}} label="Description"><%= episode.description %></:col>
+  <:col :let={{_id, episode}} label="Pub date"><%= episode.pub_date %></:col>
+  <:col :let={{_id, episode}} label="Url"><%= episode.url %></:col>
+  <:col :let={{_id, episode}} label="Type"><%= episode.type %></:col>
+  <:col :let={{_id, episode}} label="Duration"><%= episode.duration %></:col>
+  <:action :let={{_id, episode}}>
+    <div class="sr-only">
+      <.link navigate={~p"/episodes/#{episode}"}>Show</.link>
+    </div>
+    <.link patch={~p"/episodes/#{episode}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, episode}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: episode.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="episode-modal" show on_cancel={JS.patch(~p"/podcasts/#{@podcast_id}/episodes")}>
+  <.live_component
+    module={PodProWeb.EpisodeLive.FormComponent}
+    id={@episode.id || :new}
+    title={@page_title}
+    action={@live_action}
+    episode={@episode}
+    podcast_id={@podcast_id}
+    patch={~p"/podcasts/#{@podcast_id}/episodes"}
+  />
+</.modal>

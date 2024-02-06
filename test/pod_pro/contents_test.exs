@@ -70,4 +70,68 @@ defmodule PodPro.ContentsTest do
       assert %Ecto.Changeset{} = Contents.change_podcast(podcast)
     end
   end
+
+  describe "episodes" do
+    alias PodPro.Contents.Episode
+
+    import PodPro.ContentsFixtures
+
+    @invalid_attrs %{type: nil, description: nil, title: nil, url: nil, pub_date: nil, duration: nil}
+
+    test "list_episodes/0 returns all episodes" do
+      episode = episode_fixture()
+      assert Contents.list_episodes() == [episode]
+    end
+
+    test "get_episode!/1 returns the episode with given id" do
+      episode = episode_fixture()
+      assert Contents.get_episode!(episode.id) == episode
+    end
+
+    test "create_episode/1 with valid data creates a episode" do
+      valid_attrs = %{type: "some type", description: "some description", title: "some title", url: "some url", pub_date: ~N[2024-02-04 03:23:00], duration: 42}
+
+      assert {:ok, %Episode{} = episode} = Contents.create_episode(valid_attrs)
+      assert episode.type == "some type"
+      assert episode.description == "some description"
+      assert episode.title == "some title"
+      assert episode.url == "some url"
+      assert episode.pub_date == ~N[2024-02-04 03:23:00]
+      assert episode.duration == 42
+    end
+
+    test "create_episode/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Contents.create_episode(@invalid_attrs)
+    end
+
+    test "update_episode/2 with valid data updates the episode" do
+      episode = episode_fixture()
+      update_attrs = %{type: "some updated type", description: "some updated description", title: "some updated title", url: "some updated url", pub_date: ~N[2024-02-05 03:23:00], duration: 43}
+
+      assert {:ok, %Episode{} = episode} = Contents.update_episode(episode, update_attrs)
+      assert episode.type == "some updated type"
+      assert episode.description == "some updated description"
+      assert episode.title == "some updated title"
+      assert episode.url == "some updated url"
+      assert episode.pub_date == ~N[2024-02-05 03:23:00]
+      assert episode.duration == 43
+    end
+
+    test "update_episode/2 with invalid data returns error changeset" do
+      episode = episode_fixture()
+      assert {:error, %Ecto.Changeset{}} = Contents.update_episode(episode, @invalid_attrs)
+      assert episode == Contents.get_episode!(episode.id)
+    end
+
+    test "delete_episode/1 deletes the episode" do
+      episode = episode_fixture()
+      assert {:ok, %Episode{}} = Contents.delete_episode(episode)
+      assert_raise Ecto.NoResultsError, fn -> Contents.get_episode!(episode.id) end
+    end
+
+    test "change_episode/1 returns a episode changeset" do
+      episode = episode_fixture()
+      assert %Ecto.Changeset{} = Contents.change_episode(episode)
+    end
+  end
 end
